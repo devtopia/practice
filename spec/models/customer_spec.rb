@@ -23,7 +23,7 @@ RSpec.describe Customer, type: :model do
 
   %w{family_name given_name}.each do |column_name|
     example "#{column_name}は漢字、ひらがな、カタカナを含んでもよい" do
-      customer[column_name] = '亜あア'
+      customer[column_name] = '亜あアーン'
       expect(customer).to be_valid
     end
 
