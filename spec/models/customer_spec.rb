@@ -19,6 +19,12 @@ RSpec.describe Customer, type: :model do
       expect(customer).not_to be_valid
       expect(customer.errors[column_name]).to be_present
     end
+
+    example "#{column_name}に含まれる半角カナは全角カナに交換して受け入れる" do
+      customer[column_name] = 'ｱｲｳ'
+      expect(customer).to be_valid
+      expect(customer[column_name]).to eq('アイウ')
+    end
   end
 
   %w{family_name given_name}.each do |column_name|
@@ -28,7 +34,7 @@ RSpec.describe Customer, type: :model do
     end
 
     example "#{column_name}は漢字、ひらがな、カタカナ以外の文字を含まない" do
-      ['A', '1', '@'].each do |value|
+      %w(A 1 @).each do |value|
         customer[column_name] = value
         expect(customer).not_to be_valid
         expect(customer[column_name]).to be_present
@@ -37,6 +43,19 @@ RSpec.describe Customer, type: :model do
   end
 
   %w(family_name_kana given_name_kana).each do |column_name|
+    example "#{column_name}はカタカナを含んでも良い" do
+      customer[column_name] = 'アイウ'
+      expect(customer).to be_valid
+    end
+
+    example "#{column_name}はカタカナ以外の文字を含まない" do
+      %w(亜 A 1 @).each do |value|
+        customer[column_name] = value
+        expect(customer).not_to be_valid
+        expect(customer.errors[column_name]).to be_present
+      end
+    end
+
     example "#{column_name}に含まれるひらがなはカタカナに交換して受け入れる" do
       customer[column_name] = 'あいう'
       expect(customer).to be_valid

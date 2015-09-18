@@ -1,0 +1,9 @@
+= form_tag :login, id: 'new_session'
+  div
+    = label_tag 'username', 'ユーザー名'
+    = text_field_tag 'username'
+  div  
+    = label_tag 'password', 'パスワード'
+    = password_field_tag 'password'
+  div 
+    = submit_tag 'ログイン'

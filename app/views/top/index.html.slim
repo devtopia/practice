@@ -1,3 +1,4 @@
 h1 Top#index
 p Find me in app/views/top/index.html.slim
 p Hello World!
+= render 'login_form' unless session[:customer_id]
