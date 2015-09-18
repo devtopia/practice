@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'ログイン' do
   example 'ユーザー認証成功' do
+    Customer.stub(:authenticate)
     visit root_path
     within('form#new_session') do
       fill_in 'username', with: 'taro'
@@ -12,6 +13,7 @@ describe 'ログイン' do
   end
 
   example 'ユーザー認証失敗' do
+    Customer.stub(:authenticate)
     visit root_path
     within('form#new_session') do
       fill_in 'username', with: 'taro'
