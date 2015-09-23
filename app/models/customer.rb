@@ -16,4 +16,8 @@ class Customer < ActiveRecord::Base
     self.family_name_kana = NKF.nkf('-wh2', family_name_kana) if family_name_kana
     self.given_name_kana = NKF.nkf('-wh2', given_name_kana) if given_name_kana
   end
+
+  def self.authenticate(username, password)
+    'test'
+  end
 end
