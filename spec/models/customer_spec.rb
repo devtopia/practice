@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Customer, type: :model do
+describe Customer, 'バリデーション' do
   let(:customer) { FactoryGirl.build(:customer) }
 
   example '妥当なオブジェクト' do
@@ -62,5 +62,13 @@ RSpec.describe Customer, type: :model do
       expect(customer[column_name]).to eq('アイウ')
     end
   end
+end
 
+describe Customer, '.authenticate' do
+  let(:customer) {create(:customer, username: 'taro', password: 'correct_password')}
+
+  example 'ユーザー名とパスワードに該当するCustomerオブジェクトを返す' do
+    result = Customer.authenticate(customer.username, 'correct_password')
+    expect(result).to eq(customer)
+  end
 end

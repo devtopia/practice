@@ -1,6 +1,8 @@
 require 'nkf'
 
 class Customer < ActiveRecord::Base
+  attr_accessor :password
+
   validates :family_name, presence: true, length: {maximum: 40},
             format: {with: /\A[\p{Han}\p{Hiragana}\p{Katakana}\u30fc]+\z/, allow_blank: true}
   validates :given_name, presence: true, length: {maximum: 40},
@@ -18,6 +20,6 @@ class Customer < ActiveRecord::Base
   end
 
   def self.authenticate(username, password)
-    'test'
+    find_by_username(username)
   end
 end
