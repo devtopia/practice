@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 FactoryGirl.define do
   factory :customer do
     username 'taro'
