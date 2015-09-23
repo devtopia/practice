@@ -1,4 +1,5 @@
 require 'nkf'
+require 'bcrypt'
 
 class Customer < ActiveRecord::Base
   attr_accessor :password
@@ -19,7 +20,16 @@ class Customer < ActiveRecord::Base
     self.given_name_kana = NKF.nkf('-wh2', given_name_kana) if given_name_kana
   end
 
+  before_save do
+    self.password_digest = password if password.present?
+  end
+
   def self.authenticate(username, password)
-    find_by_username(username)
+    customer = find_by_username(username)
+    if customer && BCrypt::Password.new(customer.password_digest) == customer.password
+      customer
+    else
+      nil
+    end
   end
 end

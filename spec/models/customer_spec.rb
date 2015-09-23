@@ -64,6 +64,22 @@ describe Customer, 'バリデーション' do
   end
 end
 
+describe Customer, 'password=' do
+  let(:customer) {build(:customer, username: 'taro')}
+
+  example '生成されたpassword_digestは60文字' do
+    customer.password = 'any_string'
+    customer.save!
+    expect(customer.password_digest).not_to be_nil
+  end
+
+  example '空文字を与えるとpassword_digestはnil' do
+    customer.password = ''
+    customer.save!
+    expect(customer.password_digest).to be_nil
+  end
+end
+
 describe Customer, '.authenticate' do
   let(:customer) {create(:customer, username: 'taro', password: 'correct_password')}
 

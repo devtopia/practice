@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150914060814) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "username",         null: false
+    t.string   "password_digest"
     t.string   "family_name",      null: false
     t.string   "given_name",       null: false
     t.string   "family_name_kana", null: false
