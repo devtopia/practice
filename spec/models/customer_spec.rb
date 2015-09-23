@@ -81,8 +81,7 @@ describe Customer, 'password=' do
 end
 
 describe Customer, '.authenticate' do
-  let(:customer) {create(:customer, username: 'taro', password: 'correct_password')}
-  # let(:customer) {create(:customer, username: 'taro', password: BCrypt::Password.create('correct_password'))}
+  let(:customer) {create(:customer, username: 'taro', password: BCrypt::Password.create('correct_password'))}
 
   example 'ユーザー名とパスワードに該当するCustomerオブジェクトを返す' do
     result = Customer.authenticate(customer.username, 'correct_password')
