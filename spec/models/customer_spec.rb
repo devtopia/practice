@@ -71,4 +71,14 @@ describe Customer, '.authenticate' do
     result = Customer.authenticate(customer.username, 'correct_password')
     expect(result).to eq(customer)
   end
+
+  example 'パスワードが一致しない場合nilを返す' do
+    result = Customer.authenticate(customer.username, 'wrong_password')
+    expect(result).to be_nil
+  end
+
+  example '該当するユーザー名が存在しない場合はnilを返す' do
+    result = Customer.authenticate('hanako', 'any_string')
+    expect(result).to be_nil
+  end
 end
