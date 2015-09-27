@@ -106,7 +106,7 @@ describe Customer, '.authenticate' do
 
   example 'ログインに成功すると、ユーザーの保有ポイントが１増える' do
     # pending 'Customer#pointsが未実装'
-    allow(customer).to receive(:points).and_return(0)
+    # allow(customer).to receive(:points).and_return(0)
     expect {
       Customer.authenticate(customer.username, 'correct_password')
     }.to change { customer.points }.by(1)
@@ -117,7 +117,6 @@ describe Customer, '.authenticate' do
     date_boundary = Time.zone.local(2015, 9, 27, 5, 0, 0)
     expect {
       Timecop.freeze(date_boundary.advance(seconds: -1))
-      binding.pry
       Customer.authenticate(customer.username, 'correct_password')
       Timecop.freeze(date_boundary)
       Customer.authenticate(customer.username, 'correct_password')
