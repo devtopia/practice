@@ -103,4 +103,24 @@ describe Customer, '.authenticate' do
     result = Customer.authenticate(customer.username, '')
     expect(result).to be_nil
   end
+
+  example 'ログインに成功すると、ユーザーの保有ポイントが１増える' do
+    # pending 'Customer#pointsが未実装'
+    allow(customer).to receive(:points).and_return(0)
+    expect {
+      Customer.authenticate(customer.username, 'correct_password')
+    }.to change { customer.points }.by(1)
+  end
+end
+
+describe Customer, '#points' do
+  let(:customer) { create(:customer, username: 'taro') }
+
+  example '関連付けられたRewardのpointsを合計して返す' do
+    customer.rewards.create(points: 1)
+    customer.rewards.create(points: 5)
+    customer.rewards.create(points: -2)
+
+    expect(customer.points).to eq(4)
+  end
 end
