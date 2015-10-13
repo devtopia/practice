@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    if customer = Customer.authenticate(params[:username], params[:password])
+    if customer = ReceptionDeskService.new(params[:username], params[:password]).sign_in
       session[:customer_id] = customer.id
     else
       flash.alert = 'ユーザー名またはパスワードが正しくありません。'
