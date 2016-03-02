@@ -1,9 +1,10 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   pool: 5
-  username: devnote
-  template: template1
+  username: root
+  password:
+  host: localhost
 
 development:
   <<: *default
@@ -16,18 +17,3 @@ test:
 production:
   <<: *default
   database: oiax
-  username: devnote
-  password: devnote
-  host: 192.168.33.30
-  port: 9999
-  template: template1
-
-ora:
-  adapter: oracle_enhanced
-  encoding: utf8
-  host: 192.168.33.40
-  port: 1521
-  database: xe
-  username: scott
-  password: tiger
-  pool: 5

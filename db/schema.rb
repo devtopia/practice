@@ -13,25 +13,22 @@
 
 ActiveRecord::Schema.define(version: 20150924070150) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "customers", force: :cascade do |t|
-    t.string   "username",         null: false
-    t.string   "password_digest"
-    t.string   "family_name",      null: false
-    t.string   "given_name",       null: false
-    t.string   "family_name_kana", null: false
-    t.string   "given_name_kana",  null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "username",         limit: 255, null: false
+    t.string   "password_digest",  limit: 255
+    t.string   "family_name",      limit: 255, null: false
+    t.string   "given_name",       limit: 255, null: false
+    t.string   "family_name_kana", limit: 255, null: false
+    t.string   "given_name_kana",  limit: 255, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "rewards", force: :cascade do |t|
-    t.integer  "customer_id"
-    t.integer  "points"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "customer_id", limit: 4
+    t.integer  "points",      limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end
